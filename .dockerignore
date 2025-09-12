@@ -1,0 +1,17 @@
+# Node modules
+node_modules
+npm-debug.log
+
+# Build outputs
+dist
+build
+
+# Git files
+.git
+.gitignore
+
+# OS / editor files
+.DS_Store
+.vscode
+.idea
+
