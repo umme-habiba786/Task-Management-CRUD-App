@@ -12,28 +12,6 @@ This repository contains a complete **full-stack Task Management CRUD applicatio
 - **UPDATE** ✏️ Edit existing tasks (full and partial updates supported)
 - **DELETE** 🗑️ Remove tasks with confirmation dialogs
 
-### Web Interface Features
-- **Responsive Design** - Works on desktop, tablet, and mobile devices
-- **Interactive Dashboard** - Real-time statistics and task counters
-- **Advanced Filtering** - Filter by status, priority, search text, and sorting options
-- **Modern UI** - Beautiful gradient design with FontAwesome icons
-- **Toast Notifications** - User feedback for all operations
-- **Keyboard Shortcuts** - Ctrl+N (new task), Escape (cancel), Ctrl+R (refresh)
-
-### REST API Endpoints
-```
-GET    /              - Web Application Interface
-GET    /api           - API Documentation  
-GET    /health        - Health Check with System Information
-GET    /api/stats     - Application Statistics
-GET    /api/tasks     - Get All Tasks (with filtering support)
-GET    /api/tasks/:id - Get Specific Task
-POST   /api/tasks     - Create New Task
-PUT    /api/tasks/:id - Update Task (Complete)
-PATCH  /api/tasks/:id - Update Task (Partial)
-DELETE /api/tasks/:id - Delete Task
-```
-
 ## 🏗️ Docker Architecture
 
 ### Multi-Stage Build Strategy
@@ -50,8 +28,6 @@ The Dockerfile implements a **two-stage build process** to optimize image size a
 - **Designed for average Docker users** who have many images on their system
 - Contains development tools needed for npm builds and compilation
 
-> *"This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of. This tag is based off of buildpack-deps, which reduces the number of packages that images that derive from it need to install, thus reducing the overall size of all images on your system."*
-
 ### Stage 2: Production (`node:18-alpine`)
 **Base Image**: `node:18-alpine`
 **Purpose**: Minimal runtime environment for production deployment
@@ -61,8 +37,6 @@ The Dockerfile implements a **two-stage build process** to optimize image size a
 - **Security-focused** with minimal attack surface  
 - **Production-optimized** for running applications, not building them
 - Uses `musl libc` instead of `glibc` for smaller footprint
-
-> *"This image is based on the popular Alpine Linux project. Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general. This variant is useful when final image size being as small as possible is your primary concern. To minimize image size, it's uncommon for additional related tools (such as git or bash) to be included in Alpine-based images."*
 
 ## 🛠️ Implementation Steps
 
@@ -146,29 +120,6 @@ Assignment/
 3. **Update Tasks**: Click edit button on any task to modify it
 4. **Delete Tasks**: Click delete button with confirmation dialog
 
-#### Via REST API
-```bash
-# Create a new task
-curl -X POST http://localhost:3000/api/tasks \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Learn Docker",
-    "description": "Master containerization concepts", 
-    "priority": "high",
-    "status": "pending"
-  }'
-
-# Get all tasks
-curl http://localhost:3000/api/tasks
-
-# Update a task
-curl -X PUT http://localhost:3000/api/tasks/1 \
-  -H "Content-Type: application/json" \
-  -d '{"status": "completed"}'
-
-# Delete a task  
-curl -X DELETE http://localhost:3000/api/tasks/1
-```
 
 ## 📊 Application Monitoring
 
@@ -320,16 +271,6 @@ dist/            # Build outputs (not needed in builder stage)
 2. **Minimal base image**: Reduced attack surface
 3. **Production-only dependencies**: No development tools in final image
 4. **Health checks**: Early detection of compromised containers
-
-## Best Practices Implemented
-
-✅ **Multi-stage builds** for size optimization  
-✅ **Alpine Linux** for security and size  
-✅ **Layer caching** for faster builds  
-✅ **Non-root user** for security  
-✅ **Health checks** for monitoring  
-✅ **Minimal file copying** for efficiency  
-✅ **Production dependencies only** for security  
 
 ## Usage
 
